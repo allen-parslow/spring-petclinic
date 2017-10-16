@@ -78,6 +78,10 @@ module.exports = {
          from: 'js/assets/',
          to: 'assets/',
       },
+        {
+           from: 'js/fonts/',
+           to: 'fonts/',
+        },
     ]),
     new ExtractTextPlugin("assets/app.css"),
     new HtmlWebpackPlugin({

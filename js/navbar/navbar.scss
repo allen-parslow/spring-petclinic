@@ -1,0 +1,70 @@
+@import "../global-var";
+
+.navbar {
+    background-color: $spring-brown;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 4px solid $spring-green;
+    margin-bottom: 0px;
+
+    li > a, .navbar-text {
+      font-family: "montserratregular", sans-serif;
+      font-size: 14px;
+      padding: 28px 20px;
+      text-shadow: none;
+      text-transform: uppercase;
+      transition-duration: .15s;
+    }
+
+    .navbar-brand {
+        background: url("./images/spring-logo-dataflow.png") -1px -1px no-repeat;
+        display: inline-block;
+        height: 46px;
+        margin: 12px 0 6px;
+        padding: 0;
+        text-decoration: none;
+        width: 229px;
+
+        span {
+              background: url("./images/spring-logo-dataflow.png") -1px -48px no-repeat;
+              display: block;
+              height: 46px;
+              opacity: 0;
+              width: 229px;
+        }
+    }
+
+    a:hover.navbar-brand span {
+      opacity: 1;
+    }
+}
+
+.navbar-default {
+  .navbar-nav {
+    span {
+      padding-left: 4px;
+    }
+  }
+
+  .navbar-nav > {
+    li > a {
+      color: $spring-light-grey;
+
+      &:hover, &:focus {
+        background-color: $spring-green;
+        color: $spring-light-grey;
+      }
+    }
+
+    .active > a {
+      background-color: $spring-green;
+      color: $spring-light-grey;
+
+      &:hover, &:focus {
+        background-color: $spring-green;
+        color: $spring-light-grey;
+      }
+    }
+  }
+}

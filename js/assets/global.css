@@ -1,0 +1,16 @@
+@font-face {
+	font-family: "montserratregular";
+	src: url("fonts/montserratregular.eot?") format("eot"),
+		 url("fonts/montserratregular.woff") format("woff"),
+		 url("fonts/montserratregular.ttf") format("truetype"),
+		 url("fonts/montserratregular.svg#Samplino") format("svg");
+}
+
+@font-face {
+	font-family: "varela_roundvarela_round";
+	src: url("fonts/varela_roundregular.eot?") format("eot"),
+		 url("fonts/varela_roundregular.woff2") format("woff2"),
+		 url("fonts/varela_roundregular.woff") format("woff"),
+		 url("fonts/varela_roundregular.ttf") format("truetype"),
+		 url("fonts/varela_roundregular.svg#Samplino") format("svg");
+}

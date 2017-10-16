@@ -4,5 +4,11 @@ files:
     - 'node_modules/'
 rules:
   indentation:
-    - 2
-    - size: 4
+    - 0
+  single-line-per-selector:
+    - 0
+  quotes:
+    - 1
+    - style: double
+  zero-unit:
+    - 0

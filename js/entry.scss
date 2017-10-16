@@ -1,7 +1,60 @@
+@import "global-var";
+
+$body-bg:                           $spring-light-grey;
+$text-color:                        $spring-brown;
+$link-color:                        $spring-dark-green;
+$link-hover-color:                  $spring-dark-green;
+
+$border-radius-base:             0;
+$border-radius-large:            0;
+$border-radius-small:            0;
+
+$btn-default-color:              $spring-light-grey;
+$btn-default-bg:                 $spring-brown;
+$btn-default-border:             $spring-green;
+
+$nav-tabs-active-link-hover-color:        $spring-light-grey;
+$nav-tabs-active-link-hover-bg:           $spring-brown;
+$nav-tabs-active-link-hover-border-color: $spring-brown;
+$nav-tabs-border-color:                   $spring-brown;
+
+$pagination-active-bg:                    $spring-brown;
+$pagination-active-border:                $spring-green;
+$table-border-color:                      $spring-brown;
+
 body {
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: $spring-light-grey;
 }
-    
+
+body, h1, h2, h3, p, input {
+  color: $spring-brown;
+  font-family: "varela_roundregular", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+h1 {
+  font-family: "montserratregular", sans-serif;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+h2 {
+  font-family: "montserratregular", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+strong {
+  font-family: "montserratregular", sans-serif;
+  font-weight: 700;
+}

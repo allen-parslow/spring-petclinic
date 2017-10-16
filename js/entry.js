@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import Home from "./home/home";
+
 require("./entry.scss");
 
-ReactDOM.render(<div className="alert alert-info">Welcome: cats and dogs</div>, document.getElementById("app"));
+ReactDOM.render(<Home/>, document.getElementById("app"));
