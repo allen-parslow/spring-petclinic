@@ -1,5 +1,5 @@
 import React from "react";
-import i18n from "../i18n/i18n";
+import i18n from "i18n-lite";
 
 export default class Footer extends React.Component {
     render() {

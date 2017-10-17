@@ -8,7 +8,7 @@ var path = require('path');
 console.log("Building " + process.env.npm_package_name + " v" + process.env.npm_package_version);
 
 module.exports = {
-  entry: "./js/entry.js",
+  entry: "./src/entry.js",
   output: {
     path: path.resolve(__dirname, './build/dist'),
     filename: "app.js"
@@ -75,23 +75,23 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       {
-         from: 'js/assets/',
+         from: 'src/assets/',
          to: 'assets/',
       },
         {
-           from: 'js/fonts/',
+           from: 'src/fonts/',
            to: 'fonts/',
         },
     ]),
     new ExtractTextPlugin("assets/app.css"),
     new HtmlWebpackPlugin({
-      template: './js/index.html',
+      template: './src/index.html',
       filename: 'index.html',
       inject: 'body'
     }),
     new sassLintPlugin({
       configFile: '.sass-lint.yml',
-      glob: 'js/**/*.s?(a|c)ss',
+      glob: 'src/**/*.s?(a|c)ss',
       quiet: false,
       ignorePlugins: [
          'extract-text-webpack-plugin',

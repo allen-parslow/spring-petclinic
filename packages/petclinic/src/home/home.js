@@ -1,5 +1,5 @@
 import React from "react";
-import i18n from "../i18n/i18n";
+import i18n from "i18n-lite";
 
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
