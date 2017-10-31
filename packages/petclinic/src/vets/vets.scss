@@ -1,0 +1,44 @@
+@import "../global-var";
+
+.vets {
+    margin-top: 40px;
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    thead > tr > th {
+        background-color: lighten($spring-brown, 3%);
+        color: $spring-light-grey;
+    }
+    table td {
+        vertical-align: middle;
+      }
+      
+      table td .progress {
+        margin-bottom: 0;
+      }
+      
+      table td.action-column {
+        width: 1px;
+      }
+      
+      table {
+        margin-bottom: 20px;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      tbody > tr > td, thead > tr > th {
+        border-top: 1px solid $spring-brown;
+        line-height: 1.428571429;
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      tbody tr:nth-child(odd){
+        background-color: $spring-white;
+      }
+}
+
+
