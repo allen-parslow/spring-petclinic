@@ -12,11 +12,11 @@ describe("i18n Utilities", () => {
     });
     
     it("Should fallback to key name when not found", () => {
-        expect(i18n.t("TEXT__THIS_KEY_IS_NOT_THERE", null, true)).toBe("TEXT__THIS_KEY_IS_NOT_THERE");
+        expect(i18n.t("TEXT__THIS_KEY_IS_NOT_THERE", null)).toBe("TEXT__THIS_KEY_IS_NOT_THERE");
     });  
 
     it("Should fallback to default key name when no key is provided", () => {
-        expect(i18n.t(null, null, true)).toBe("NO_I18N_KEY");
+        expect(i18n.t(null, null)).toBe("NO_I18N_KEY");
     });  
 
     it("Should interpolate arguments", () => {

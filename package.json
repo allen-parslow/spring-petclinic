@@ -2,14 +2,15 @@
   "name": "spring-petclinic",
   "author": "React Implementation by Allen Parslow",
   "description": "spring-petclinic using webpack + React + aws",
-  "license": "APACHE 2",
+  "private": true,
+  "license": "Apache-2.0",
   "version": "1.0.0",
   "keywords": [
     "webpack",
     "docker",
     "react"
   ],
-  "homepage": "https://github.com/allen-parslow/spring-petclinic-react#readme"
+  "homepage": "https://github.com/allen-parslow/spring-petclinic-react#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/allen-parslow/spring-petclinic-react.git"

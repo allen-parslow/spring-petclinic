@@ -23,19 +23,13 @@ export default class Navbar extends React.Component {
                 <div className="container">
                     <div className="navbar-header">
                         <a className="navbar-brand" href="/"><span/></a>
-                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-                            <span className="sr-only"><os-p>Toggle navigation</os-p></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
                     </div>
                     <div className="navbar-collapse collapse" id="main-navbar">
                         <ul className="nav navbar-nav navbar-right">
-                            <NavBarItem active={true} href="/" name="NAV__HOME" icon="home" />
-                            <NavBarItem href="/owners/find" name="NAV__OWNERS" icon="search" />
-                            <NavBarItem name="NAV__VETERINARIANS" icon="th-list" />
-                            <NavBarItem name="NAV__ERROR" icon="warning-sign" />
+                            <NavBarItem href="/" name="NAV__HOME" icon="home" active={this.props.selected === "home"} />
+                            <NavBarItem href="/owners/find" name="NAV__OWNERS" icon="search" active={this.props.selected === "owners"} />
+                            <NavBarItem href="/vets" name="NAV__VETERINARIANS" icon="th-list" active={this.props.selected === "vets"} />
+                            <NavBarItem name="NAV__ERROR" icon="warning-sign" active={this.props.selected === "error"} />
                         </ul>
                     </div>
                 </div>

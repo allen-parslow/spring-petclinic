@@ -10,13 +10,13 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                <Navbar/>
-                    <div className="welcome container-fluid">
-                        <div className="container xd-container">
-                            <h1>{i18n.t("TEXT__WELCOME_GREETING")}</h1>
-                            <img className="img-responsive" src="/assets/images/pets.png"/>
-                        </div>
+                <Navbar selected="home"/>
+                <div className="welcome container-fluid">
+                    <div className="container xd-container">
+                        <h1>{i18n.t("TEXT__WELCOME_GREETING")}</h1>
+                        <img className="img-responsive" src="/assets/images/pets.png"/>
                     </div>
+                </div>
                 <Footer/>
             </div>
         );
