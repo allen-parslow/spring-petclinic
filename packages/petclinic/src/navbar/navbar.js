@@ -27,7 +27,7 @@ export default class Navbar extends React.Component {
                     <div className="navbar-collapse collapse" id="main-navbar">
                         <ul className="nav navbar-nav navbar-right">
                             <NavBarItem href="/" name="NAV__HOME" icon="home" active={this.props.selected === "home"} />
-                            <NavBarItem href="/owners/find" name="NAV__OWNERS" icon="search" active={this.props.selected === "owners"} />
+                            <NavBarItem href="/owners" name="NAV__OWNERS" icon="search" active={this.props.selected === "owners"} />
                             <NavBarItem href="/vets" name="NAV__VETERINARIANS" icon="th-list" active={this.props.selected === "vets"} />
                             <NavBarItem name="NAV__ERROR" icon="warning-sign" active={this.props.selected === "error"} />
                         </ul>

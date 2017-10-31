@@ -1,0 +1,30 @@
+@import "../global-var";
+
+.owners {
+    margin-top: 40px;
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .btn-default {
+      color: $spring-light-grey;
+      background-color: $spring-brown;
+      border-color: $spring-green;
+    }
+
+    .btn-default:focus,
+    .btn-default.focus {
+      color: $spring-light-grey;
+      background-color: $spring-dark-brown;
+      border-color: $spring-dark-green;
+    }
+    .btn-default:hover {
+      color: $spring-light-grey;
+      background-color: $spring-dark-brown;
+      border-color: $spring-dark-brown;
+    }
+}
+
+

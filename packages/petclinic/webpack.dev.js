@@ -10,5 +10,6 @@ module.exports = merge(common, {
             'NODE_ENV': JSON.stringify('development')
           }
         })
-      ]
+      ],
+      devServer: { historyApiFallback: true }
 });
