@@ -9,21 +9,21 @@
     }
 
     .btn-default {
-      color: $spring-light-grey;
       background-color: $spring-brown;
       border-color: $spring-green;
-    }
+      color: $spring-light-grey;
 
-    .btn-default:focus,
-    .btn-default.focus {
-      color: $spring-light-grey;
-      background-color: $spring-dark-brown;
-      border-color: $spring-dark-green;
-    }
-    .btn-default:hover {
-      color: $spring-light-grey;
-      background-color: $spring-dark-brown;
-      border-color: $spring-dark-brown;
+      &:hover {
+        background-color: $spring-dark-brown;
+        border-color: $spring-dark-brown;
+        color: $spring-light-grey;
+      }
+
+      &:focus, &.focus {
+        background-color: $spring-dark-brown;
+        border-color: $spring-dark-green;
+        color: $spring-light-grey;
+      }
     }
 }
 
