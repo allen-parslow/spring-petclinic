@@ -6,6 +6,17 @@ import Footer from "../footer/footer";
 
 import "./vets.scss";
 
+const renderSpecialty = (specialty, i) => {
+    return <span key={"specialty_" + i}>{specialty} </span>;
+};
+
+const renderRow = (row, i) => {
+    return <tr key={"vet_" + i}>
+        <td>{row.firstName} {row.lastName}</td>
+        <td>{ row.specialties.map( (specialty, j) =>  renderSpecialty(specialty, j) ) }</td>
+    </tr>;
+};
+
 export default class Vets extends React.Component {
     constructor() {
         super();
@@ -51,7 +62,7 @@ export default class Vets extends React.Component {
           ]
         };
       }
-      
+
     render() {
         return (
             <div>
@@ -67,7 +78,7 @@ export default class Vets extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            { this.state.vets.map( (row, i) => this.renderRow(row, i) ) }
+                            {this.state.vets.map( (row, i) => renderRow(row, i) )}
                         </tbody>
                     </table>
                 </div>
@@ -75,20 +86,4 @@ export default class Vets extends React.Component {
             </div>
         );
     }
-
-    renderRow(row, i) {
-        return (
-            <tr key={"vet_" + i}>
-                <td>{row.firstName} {row.lastName}</td>
-                <td>{ row.specialties.map( (specialty, j) =>  this.renderSpecialty(specialty, j) ) }</td>
-            </tr>
-        );
-    }
-
-    renderSpecialty(specialty, i) {
-        return (
-            <span key={"specialty_" + i}>{specialty} </span>
-        );
-    }
 }
-
