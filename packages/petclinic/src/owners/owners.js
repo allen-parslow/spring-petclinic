@@ -8,19 +8,27 @@ import Footer from "../footer/footer";
 import "./owners.scss";
 
 const mapStateToProps = (state, ownProps) => {
-    console.log("mapStateToProps=" + JSON.stringify(state) + " -|- " + JSON.stringify(ownProps) );
     return {
         counter: state.counter
     };
   };
 
 const CounterAmt = connect(mapStateToProps)(({counter}) => {
-    console.log("CounterAmt=" + JSON.stringify(counter));
     return <div>Counter: {counter}</div>;
 });
 
+const CounterBtn = ({clicked}) => {
+    return <button className="btn btn-default" onClick={()=>{clicked({ type: "INCREMENT" });}}>Find Owner</button>;
+};
+
+const ownerSearchChanged = (value) => {
+    return {
+        type: "OWNER_SEARCH_CHANGED",
+        text: value
+    };
+};
+
 const Owners = ({ dispatch }) => {
-    dispatch({ type: "INCREMENT" });
     return <div>
         <Navbar selected="owners" />
         <div className="owners container xd-container">
@@ -30,15 +38,15 @@ const Owners = ({ dispatch }) => {
                     <div className="control-group" id="lastName">
                         <label className="col-sm-2 control-label">{i18n.t("TEXT__LAST_NAME")}</label>
                         <div className="col-sm-10">
-                            <CounterAmt extended={true}/>
-                            <input className="form-control" size="30"
-                                maxLength="80" name="lastName" /> <span className="help-inline"></span>
+                            <CounterAmt/>
+                            <input className="form-control" size="30" onBlur={(e)=>{dispatch(ownerSearchChanged(e.target.value));}}
+                                maxLength="80" name="lastName" /> <span className="help-inline" ></span>
                         </div>
                     </div>
                 </div>
                 <div className="form-group">
                     <div className="col-sm-offset-2 col-sm-10">
-                        <button className="btn btn-default" onClick={()=>{console.log("clicked");dispatch({ type: "INCREMENT" });}}>Find Owner</button>
+                       <CounterBtn clicked={(event)=>dispatch(event)}/>
                     </div>
                 </div>
             </div>

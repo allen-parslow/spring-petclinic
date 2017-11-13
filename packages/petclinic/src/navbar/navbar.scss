@@ -34,11 +34,9 @@
               width: 229px;
         }
     }
-
-    a:hover.navbar-brand span {
-      opacity: 1;
-    }
+    // TODO need to update nesting: a:hover.navbar-brand span { opacity: 1; }
 }
+
 
 .navbar-default {
   .navbar-nav {

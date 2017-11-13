@@ -11,5 +11,17 @@ module.exports = merge(common, {
           }
         })
       ],
-      devServer: { historyApiFallback: true }
+      devServer: { 
+        historyApiFallback: true,
+        proxy: {
+          "/api-vets": {
+            target: "http://localhost:8082", 
+            pathRewrite: {"^/api-vets" : "petclinic-vets/"}
+          },
+          "/api-owners": {
+            target: "http://localhost:8081", 
+            pathRewrite: {"^/api-owners" : "petclinic-customers/"}
+          }
+        }
+      }
 });
