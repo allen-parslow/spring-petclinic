@@ -2,13 +2,13 @@ import thunkMiddleware from "redux-thunk";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 
 import { counterRedcuer } from "./counter-reducer";
-import { ownerReducer } from "./owner-reducer";
+import ownerReducers  from "../owners/owner-events";
 
 let store = createStore(
-    combineReducers({
-      "ownerSearch": ownerReducer,
-      "counter": counterRedcuer
-    }),
+    combineReducers(Object.assign(
+      {"counter": counterRedcuer}, 
+      ownerReducers)
+    ),
     applyMiddleware(
       thunkMiddleware
     )

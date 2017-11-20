@@ -25,4 +25,4 @@ class i18n {
     }
 }
 
-export default new i18n();
+module.exports = new i18n();
