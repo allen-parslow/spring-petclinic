@@ -1,8 +1,8 @@
 import React from "react";
 import i18n from "i18n-lite";
 
-import Navbar from "../navbar/navbar";
-import Footer from "../footer/footer";
+import Navbar from "../navbar";
+import Footer from "../footer";
 
 import "./vets.scss";
 

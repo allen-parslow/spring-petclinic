@@ -1,0 +1,33 @@
+@import "../global-var";
+
+.owners-details {
+    margin-bottom: 40px;
+    margin-top: 40px;
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .btn-link {
+        color: $spring-dark-green;
+        padding: 0 2px;
+    }
+
+    .row {
+        margin-bottom: 0px;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .help-block {
+        display: block;
+        height: 20px;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        width: 100%;
+    }
+}

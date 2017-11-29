@@ -21,9 +21,11 @@ const callApi = (service, url, options) => {
     )
     .then(json => {
       dispatch({type: service + "_SUCCESS", payload: json});
-    }).catch(error => {
-      dispatch({type: service + "_ERROR", text: "" + error});
-    });
+    })
+    //.catch(error => {
+    //  dispatch({type: service + "_ERROR", text: "" + error});
+    //})
+    ;
   };
 };
 

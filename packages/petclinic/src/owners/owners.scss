@@ -27,4 +27,14 @@
     }
 }
 
+.owners-table {
+  & > thead > tr > th {
+    background-color: $spring-brown;
+    color: $spring-light-grey;
+  }
 
+  a {
+    color: $spring-dark-green;
+    cursor: auto;
+  }
+}

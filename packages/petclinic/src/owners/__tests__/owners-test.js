@@ -1,6 +1,6 @@
 jest.mock('i18n-lite');
 
-import {OwnerSearchComponent} from'../owners';
+import {OwnerSearchComponent} from'../index';
 
 import React from "react";
 import { shallow } from 'enzyme';

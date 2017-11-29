@@ -11,9 +11,10 @@ import { Provider as ReduxProvider } from "react-redux";
 import store from "./store";
 
 // App Components
-import Home from "./home/home";
-import Vets from "./vets/vets";
-import Owners from "./owners/owners";
+import Home from "./home";
+import Vets from "./vets";
+import Owners from "./owners";
+import OwnerDetails from "./owners-details";
 
 const App = () => (
   <ReduxProvider store={store}>
@@ -22,6 +23,7 @@ const App = () => (
           <Route exact path="/" component={Home}/>
           <Route path="/vets" component={Vets}/>
           <Route path="/owners" component={Owners}/>
+          <Route path="/owners-details" component={OwnerDetails}/>
         </div>
       </Router>
   </ReduxProvider>

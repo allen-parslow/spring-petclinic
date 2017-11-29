@@ -3,7 +3,7 @@ import restapi from "../restapi";
 const OWNER_STATE_KEY = "ownerSearch";
 
 const ownerInitialState = {
-    searchText: "Last Name Here",
+    searchText: "",
     // results: null,
     // searching: null,
     // error: null
@@ -31,19 +31,18 @@ export const ownerSearchStateMapper = (state, ownProps) => {
 };
 
 export const ownerReducer = (state = ownerInitialState, action) => {
-  console.log("action=" + JSON.stringify(action));
+  //console.log("action=" + JSON.stringify(action));
   switch (action.type) {
     case OWNER_SEARCH_CHANGED:
-      return { searchText: action.text };
+      return Object.assign({}, state, { searchText: action.text });
     case ACTION_PREFIX + "_PENDING":
       return Object.assign({}, state, { pending: true }); 
     case ACTION_PREFIX + "_SUCCESS":
-      console.log("payload=" + JSON.stringify(action.payload));
+      //console.log("payload=" + JSON.stringify(action.payload));
       return { results: action.payload};   
     case ACTION_PREFIX + "_ERROR":
       return { error: action.text };  
     default:
-      console.warn("default action=" + JSON.stringify(action));
       return state;
   }
 };
