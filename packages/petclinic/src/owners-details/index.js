@@ -14,6 +14,7 @@ import "./owners-details.scss";
 import URLSearchParams from "url-search-params";
 
 const ownerValidators = {
+    firstName: [validatorTypes.required],
     lastName: [validatorTypes.required, validatorTypes.min(4)],
     zip: [validatorTypes.exactLength(5), validatorTypes.digits],
     state: [validatorTypes.required]

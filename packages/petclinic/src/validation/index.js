@@ -19,7 +19,6 @@ const doValidate = (field, value, isValid, text) => {
         validation.text = text;
     }
 
-    //console.log("Validation " + field + ".required=" + JSON.stringify(validation));  
     let result = {};
     result[field] = validation;
 
@@ -69,50 +68,43 @@ export const validatorTypes = {
     }
 };
 
-export const ValidationWrapper = (props) => {
-
-};
-
-export const ValidatedInput = props => {
-    let editing = props.src.editing; 
-    let value = props.src.result[props.field];
-    let editValue = props.src.changed ? props.src.changed[props.field] : value;
+const ValidationWrapper = (props) => {
+    let editing = props.src.editing;
     let validation = getValidation(props.field, props.src.validation);
 
     return <div className={"form-group col-sm-" + props.size + " " + (editing ? !validation.valid ? "has-error" : "has-success" : "")}>
         <div>
             <label className="control-label">{props.label}</label>
         </div>
-        {!editing ? value : <input className="form-control" 
-            onBlur={(e) => onChangeEvent(e, props)}
-            defaultValue={editValue}/>}
+        {!editing ? props.displayValue : props.children}
         <span className="help-block">{(editing && !validation.valid) ? validation.text: ""}</span> 
     </div>;
 };
 
-export const ValidatedSelect = props => {
-    let editing = props.src.editing; 
+export const ValidatedInput = props => {
     let value = props.src.result[props.field];
     let editValue = props.src.changed ? props.src.changed[props.field] : value;
-    let validation = getValidation(props.field, props.src.validation);
 
-    let displayValue = props.options.lookup(value);
+    return <ValidationWrapper {...props} displayValue={value}>
+            <input className="form-control" 
+                    onBlur={(e) => onChangeEvent(e, props)}
+                    defaultValue={editValue}/>
+         </ValidationWrapper>;
+};
 
-    return <div className={"form-group col-sm-" + props.size + " " + (editing ? !validation.valid ? "has-error" : "has-success" : "")}>
-        <div>
-            <label className="control-label">{props.label}</label>
-        </div>
-        {!editing ? displayValue : 
+export const ValidatedSelect = props => {
+    let value = props.src.result[props.field];
+    let editValue = props.src.changed ? props.src.changed[props.field] : value;
+
+    return <ValidationWrapper {...props} displayValue={props.options.lookup(value)}>
             <select className="form-control" value={editValue}
                     onChange={e => onChangeEvent(e, props)}
-                    onBlur={e => onChangeEvent(e, props)}>
+                    >
                 {!props.required ? <option value="" key={props.field + ".required"}></option>: null}
                 {props.options.pairs.map((item) => <option value={item.key} key={props.field + item.key}>{item.value}</option>            
                 )}
             </select>            
-        }    
-        <span className="help-block">{(editing && !validation.valid) ? validation.text: ""}</span> 
-    </div>;
+        </ValidationWrapper>;
 };
 
 export const validateAll = (data, validators) => {
@@ -127,7 +119,6 @@ export const validateAll = (data, validators) => {
         if (validation && !validation.valid) {
             result[key] = validation;
             invalidCount++;
-            //console.log("validate.all.result." + key + "=" + JSON.stringify(validation));
         }
     });
     return (invalidCount == 0 ? null: result);
