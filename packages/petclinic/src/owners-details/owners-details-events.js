@@ -26,12 +26,12 @@ export const ownerDispatcher = dispatch => {
       cancelEditOwner: () => { 
         dispatch({type: CANCEL_EDIT_OWNER});
       },
-      saveOwner: (validationErrors) => { 
+      saveOwner: (body, validationErrors) => { 
         console.log("saveOwner=" + JSON.stringify(validationErrors));
         if (validationErrors) {
           dispatch({type: EDIT_OWNER_VALIDATION, validation: validationErrors});
         } else {
-          dispatch({type: SAVE_OWNER});
+          dispatch(restapi.put(ACTION_PREFIX + "_SAVING", "/api-owners/owners/" + body.id, body));
         }
       },
       editOwner: () => { 
@@ -63,7 +63,7 @@ export const ownerReducer = (state = ownerInitialState, action) => {
       return Object.assign({}, state, { editing: false, validation: null, changed: null });  
     case EDIT_OWNER:
       return Object.assign({}, state, { editing: true, validation: null, changed: state.result }); 
-    case SAVE_OWNER:
+    case ACTION_PREFIX + "_SAVING_SUCCESS":
       return Object.assign({}, state, { editing: false, validation: null, changed: null, result: state.changed });  
     case ACTION_PREFIX + "_PENDING":
       return Object.assign({}, state, { pending: true, intial: false }); 

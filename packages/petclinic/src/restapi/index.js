@@ -33,6 +33,16 @@ class RestApi {
   get(name, url, options) {
     return callApi(name, url, options);
   }
+  
+  put(name, url, body, options) {
+    return callApi(name, url, Object.assign({}, options, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    }));
+  }
 }
 
 export default new RestApi();

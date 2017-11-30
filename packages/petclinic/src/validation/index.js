@@ -1,9 +1,13 @@
 import _ from "lodash";
 import React from "react";
 
+const nullValidator = [];
+
 const VALIDATION_DEFAULT = {valid: true};
 
-const nullValidator = [];
+const getValidation = (field, validation) => {
+    return (validation || {})[field] || VALIDATION_DEFAULT;
+};
 
 const doValidate = (field, value, isValid, text) => {
     let validation = {
@@ -33,6 +37,14 @@ const validateField = (field, value, validators) => {
     return result;
 };
 
+const onChangeEvent = (e, props) => {
+    props.src.onChange(
+        props.field, 
+        e.target.value,
+        validateField(props.field, e.target.value, props.src.validators[props.field] || [])
+    );
+};
+
 export const validatorTypes = {
     required: (field, value) => {
         return doValidate(field, value, (i) => !!i && i.trim().length > 0,  "Required");
@@ -57,23 +69,49 @@ export const validatorTypes = {
     }
 };
 
+export const ValidationWrapper = (props) => {
+
+};
+
 export const ValidatedInput = props => {
     let editing = props.src.editing; 
     let value = props.src.result[props.field];
     let editValue = props.src.changed ? props.src.changed[props.field] : value;
-    let validation = props.src.validation || {};
-    let validationData = validation[props.field] || VALIDATION_DEFAULT;
-    let validators = props.src.validators[props.field] || [];
-    let size = props.size || "";
+    let validation = getValidation(props.field, props.src.validation);
 
-    return <div className={"form-group col-sm-" + size.trim() + " " + (editing ? !validationData.valid ? "has-error" : "has-success" : "")}>
+    return <div className={"form-group col-sm-" + props.size + " " + (editing ? !validation.valid ? "has-error" : "has-success" : "")}>
         <div>
             <label className="control-label">{props.label}</label>
         </div>
         {!editing ? value : <input className="form-control" 
-            onBlur={(e) => props.src.onChange(props.field, e.target.value,validateField(props.field, e.target.value, validators))} 
+            onBlur={(e) => onChangeEvent(e, props)}
             defaultValue={editValue}/>}
-        <span className="help-block">{(editing && !validationData.valid) ? validationData.text: ""}</span> 
+        <span className="help-block">{(editing && !validation.valid) ? validation.text: ""}</span> 
+    </div>;
+};
+
+export const ValidatedSelect = props => {
+    let editing = props.src.editing; 
+    let value = props.src.result[props.field];
+    let editValue = props.src.changed ? props.src.changed[props.field] : value;
+    let validation = getValidation(props.field, props.src.validation);
+
+    let displayValue = props.options.lookup(value);
+
+    return <div className={"form-group col-sm-" + props.size + " " + (editing ? !validation.valid ? "has-error" : "has-success" : "")}>
+        <div>
+            <label className="control-label">{props.label}</label>
+        </div>
+        {!editing ? displayValue : 
+            <select className="form-control" value={editValue}
+                    onChange={e => onChangeEvent(e, props)}
+                    onBlur={e => onChangeEvent(e, props)}>
+                {!props.required ? <option value="" key={props.field + ".required"}></option>: null}
+                {props.options.pairs.map((item) => <option value={item.key} key={props.field + item.key}>{item.value}</option>            
+                )}
+            </select>            
+        }    
+        <span className="help-block">{(editing && !validation.valid) ? validation.text: ""}</span> 
     </div>;
 };
 

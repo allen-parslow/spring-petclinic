@@ -5,8 +5,9 @@ import { ownerStateMapper, ownerDispatcher } from "./owners-details-events";
 
 import Navbar from "../navbar";
 import Footer from "../footer";
-import {ValidatedInput, validateAll, validatorTypes} from "../validation";
+import {ValidatedInput, ValidatedSelect, validateAll, validatorTypes} from "../validation";
 
+import STATES from "../data/states";
 
 import "./owners-details.scss";
 
@@ -14,7 +15,8 @@ import URLSearchParams from "url-search-params";
 
 const ownerValidators = {
     lastName: [validatorTypes.required, validatorTypes.min(4)],
-    zip: [validatorTypes.exactLength(5), validatorTypes.digits]
+    zip: [validatorTypes.exactLength(5), validatorTypes.digits],
+    state: [validatorTypes.required]
 
 };
 
@@ -35,7 +37,7 @@ const OwnerForm = (props) => {
         </div>
         <div className="row">
             <ValidatedInput label="City" field="city" size="3" src={data} />
-            <ValidatedInput label="State" field="state" size="2" src={data} />
+            <ValidatedSelect label="State" field="state" size="2" src={data} options={STATES}/>
             <ValidatedInput label="Zip Code" field="zip" size="2" src={data} />
         </div>
     </div>;
@@ -60,7 +62,7 @@ const OwnersDetails = (props) => {
     //console.log("OwnersDetails=" + JSON.stringify(props) + Object.keys(props));
     let renderOwnerTitle = null;
     let renderOwnerFooter = null;
-    let save = () => props.saveOwner(validateAll(props.owner.changed, ownerValidators));
+    let save = () => props.saveOwner(props.owner.changed, validateAll(props.owner.changed, ownerValidators));
 
     if (!props.owner.editing) {
         renderOwnerTitle = <h1>Owner Information<button className="btn btn-link" onClick={() => props.editOwner()}>
