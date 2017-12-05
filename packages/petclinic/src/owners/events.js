@@ -36,12 +36,12 @@ export const ownerReducer = (state = ownerInitialState, action) => {
     case OWNER_SEARCH_CHANGED:
       return Object.assign({}, state, { searchText: action.text });
     case ACTION_PREFIX + "_PENDING":
-      return Object.assign({}, state, { pending: true }); 
+      return Object.assign({}, state, { pending: true, results: null }); 
     case ACTION_PREFIX + "_SUCCESS":
       //console.log("payload=" + JSON.stringify(action.payload));
-      return { results: action.payload};   
+      return Object.assign({}, state, { pending: false, results: action.payload});   
     case ACTION_PREFIX + "_ERROR":
-      return { error: action.text };  
+      return Object.assign({}, state, { pending: false, results: null,  error: action.text });  
     default:
       return state;
   }

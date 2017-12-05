@@ -14,7 +14,7 @@ export const messageReducer = (state = msgInitialState, action) => {
         return {};  
       case "ERROR__JAVASCRIPT":  
       case "ERROR__API":    
-        console.log("action=" + JSON.stringify(action));  
+        //console.log("action=" + JSON.stringify(action));  
         return {error: true, text: action.text};
       default:
         return state;

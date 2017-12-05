@@ -26,33 +26,37 @@ describe('Owner Search Events', () => {
   }); 
 
   it('Should set state on search text changed', () => {
-    const state ={};
+    const state ={other:true};
     const newState = ownerReducer(state, OWNER_SEARCH_CHANGED_EVENT);
     expect(newState.searchText).toBe("some text");
+    expect(newState.other).toBeTruthy();
     expect(state.searchText).toBe(undefined);
   }); 
 
   it('Should set state on search started', () => {
-    const state ={};
+    const state ={other:true};
     const newState = ownerReducer(state, {"type": "OWNER_SEARCH_PENDING"});
     expect(newState.pending).toBeTruthy();
+    expect(newState.other).toBeTruthy();
     expect(state.pending).toBe(undefined);
   }); 
 
 
   it('Should set state on search error', () => {
-    const state ={pending: true};
+    const state ={pending: true, other:true};
     const newState = ownerReducer(state, {"type": "OWNER_SEARCH_ERROR", text: ERROR_TEXT});
     expect(newState.error).toBe(ERROR_TEXT);
-    expect(newState.pending).toBe(undefined);   
+    expect(newState.pending).toBe(false);   
+    expect(newState.other).toBeTruthy();
     expect(state.pending).toBeTruthy();
   }); 
 
   it('Should set state on search started', () => {
-    const state ={pending: true};
+    const state ={pending: true, other:true};
     const newState = ownerReducer(state, {"type": "OWNER_SEARCH_SUCCESS", payload: TEST_PAYLOAD});
     expect(newState.results).toBe(TEST_PAYLOAD);
-    expect(newState.pending).toBe(undefined);
+    expect(newState.pending).toBe(false);
+    expect(newState.other).toBeTruthy();
     expect(state.pending).toBeTruthy();
   }); 
 });
