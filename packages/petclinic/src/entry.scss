@@ -1,27 +1,5 @@
 @import "global-var";
 
-$body-bg:                           $spring-light-grey;
-$text-color:                        $spring-brown;
-$link-color:                        $spring-dark-green;
-$link-hover-color:                  $spring-dark-green;
-
-$border-radius-base:             0;
-$border-radius-large:            0;
-$border-radius-small:            0;
-
-$btn-default-color:              $spring-light-grey;
-$btn-default-bg:                 $spring-brown;
-$btn-default-border:             $spring-green;
-
-$nav-tabs-active-link-hover-color:        $spring-light-grey;
-$nav-tabs-active-link-hover-bg:           $spring-brown;
-$nav-tabs-active-link-hover-border-color: $spring-brown;
-$nav-tabs-border-color:                   $spring-brown;
-
-$pagination-active-bg:                    $spring-brown;
-$pagination-active-border:                $spring-green;
-$table-border-color:                      $spring-brown;
-
 body {
     background-color: $spring-light-grey;
 }
@@ -57,4 +35,12 @@ h3 {
 strong {
   font-family: "montserratregular", sans-serif;
   font-weight: 700;
+}
+
+@media screen and (min-width: 1200px) {
+  .app {
+    .container {
+      width: 970px;
+    }
+  }
 }

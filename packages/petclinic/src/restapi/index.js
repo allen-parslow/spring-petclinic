@@ -1,7 +1,8 @@
 import fetch from "isomorphic-fetch";
 
 const callApi = (service, url, options) => {
-  return dispatch => {
+  return dispatch => {    
+    dispatch({type: "CLEAR_MESSAGES"});
     dispatch({type: service + "_PENDING"});
     return fetch(url, options)
       .then(
@@ -22,9 +23,9 @@ const callApi = (service, url, options) => {
     .then(json => {
       dispatch({type: service + "_SUCCESS", payload: json});
     })
-    //.catch(error => {
-    //  dispatch({type: service + "_ERROR", text: "" + error});
-    //})
+    .catch(error => {
+      dispatch({type: "ERROR__API", text: "" + error});
+    })
     ;
   };
 };

@@ -16,7 +16,7 @@ const EDIT_OWNER_FIELD_CHANGED = ACTION_PREFIX + "_FIELD_CHANGED";
 const CANCEL_EDIT_OWNER = ACTION_PREFIX + "_CANCEL_EDTING";
 const SAVE_OWNER = ACTION_PREFIX + "_SAVE";
 
-export const ownerDispatcher = dispatch => {
+export const eventDispatcher = dispatch => {
     return {
       onOwnerChange: (field, value, validation) => { 
         let changed = {};
@@ -24,6 +24,7 @@ export const ownerDispatcher = dispatch => {
         dispatch({type: EDIT_OWNER_FIELD_CHANGED, changed: changed, validation: validation});
       },
       cancelEditOwner: () => { 
+        dispatch({type: "CLEAR_MESSAGES"});
         dispatch({type: CANCEL_EDIT_OWNER});
       },
       saveOwner: (body, validationErrors) => { 
@@ -43,8 +44,8 @@ export const ownerDispatcher = dispatch => {
     }; 
 };
 
-export const ownerStateMapper = (state, ownProps) => {
-  return Object.assign({}, ownProps, {
+export const stateMapper = (state, ownProps) => {
+  return Object.assign({}, {error: state.error}, ownProps, {
       owner: state[STATE_KEY]
   });
 };
@@ -69,8 +70,8 @@ export const ownerReducer = (state = ownerInitialState, action) => {
       return Object.assign({}, state, { pending: true, intial: false }); 
     case ACTION_PREFIX + "_SUCCESS":
       return { result: action.payload };   
-    case ACTION_PREFIX + "_ERROR":
-      return { error: action.text };  
+    case "ERROR__API":
+    return Object.assign({}, state, { pending: false, intial: false, error: true }); 
     default:
       return state;
   }

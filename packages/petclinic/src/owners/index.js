@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { ownerSearchStateMapper, ownerSearchDispatcher } from "./owner-events";
+import { stateMapper, eventDispatcher } from "./events";
 
+import Messages from "../messages";
 import Navbar from "../navbar";
 import Footer from "../footer";
 
@@ -63,12 +64,13 @@ export const OwnerSearchComponent = props => {
     </div>;
 };
 
-const OwnerSearch = connect(ownerSearchStateMapper, ownerSearchDispatcher)(OwnerSearchComponent);
+const OwnerSearch = connect(stateMapper, eventDispatcher)(OwnerSearchComponent);
 
 export default () => {
     return <div>
         <Navbar selected="owners" />
         <div className="owners container xd-container">
+            <Messages/>
             <h1>{i18n.t("TEXT__OWNERS_GREETING")}</h1>
             <OwnerSearch />
         </div>

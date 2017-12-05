@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { ownerStateMapper, ownerDispatcher } from "./owners-details-events";
+import Messages from "../messages";
+
+import { stateMapper, eventDispatcher } from "./events";
 
 import Navbar from "../navbar";
 import Footer from "../footer";
@@ -30,16 +32,16 @@ const OwnerForm = (props) => {
 
     return <div>
         <div className="row">
-            <ValidatedInput label="First Name" field="firstName" size="3" src={data} />
-            <ValidatedInput label="Last Name" field="lastName" size="4" src={data}/>
+            <ValidatedInput label="First Name" field="firstName" size="4" src={data} />
+            <ValidatedInput label="Last Name" field="lastName" size="6" src={data}/>
         </div>
         <div className="row">
-            <ValidatedInput label="Address" field="address" size="7" src={data} />
+            <ValidatedInput label="Address" field="address" size="10" src={data} />
         </div>
         <div className="row">
-            <ValidatedInput label="City" field="city" size="3" src={data} />
-            <ValidatedSelect label="State" field="state" size="2" src={data} options={STATES}/>
-            <ValidatedInput label="Zip Code" field="zip" size="2" src={data} />
+            <ValidatedInput label="City" field="city" size="4" src={data} />
+            <ValidatedSelect label="State" field="state" size="3" src={data} options={STATES}/>
+            <ValidatedInput label="Zip Code" field="zip" size="3" src={data} />
         </div>
     </div>;
 };
@@ -54,6 +56,8 @@ const OwnerLoadingForm = (props) => {
         return <img src="assets/images/loading.gif"/>;
     } else if(props.owner.result) {
         return <OwnerForm {...props}/>;
+    } else if(props.owner.error) {
+        return null;
     } else {
         return <div>???</div>;
     }
@@ -66,10 +70,10 @@ const OwnersDetails = (props) => {
     let save = () => props.saveOwner(props.owner.changed, validateAll(props.owner.changed, ownerValidators));
 
     if (!props.owner.editing) {
-        renderOwnerTitle = <h1>Owner Information<button className="btn btn-link" onClick={() => props.editOwner()}>
+        renderOwnerTitle = <h1>Owner Information{props.owner.result ? <button className="btn btn-link" onClick={() => props.editOwner()}>
                 <span className="glyphicon glyphicon-edit"/> 
             </button>
-        </h1>;
+        : null}</h1>;
     } else {
         renderOwnerTitle = <h1>Owner Information
             <button className="btn btn-link" onClick={() => props.cancelEditOwner()}>
@@ -84,14 +88,14 @@ const OwnersDetails = (props) => {
         </button>;
     }
     
-    return <div className="owners-details container">
+    return <div>
         {renderOwnerTitle}
         <OwnerLoadingForm {...props}/>
         {renderOwnerFooter}
     </div>;
 };
 
-const ReduxOwnersDetails = connect(ownerStateMapper, ownerDispatcher)(OwnersDetails);
+const ReduxOwnersDetails = connect(stateMapper, eventDispatcher)(OwnersDetails);
 
 export default () => {
     const ownerId = new URLSearchParams(document.location.search).get("id");
@@ -101,7 +105,10 @@ export default () => {
 
     return <div>
         <Navbar selected="owners" />
-        <ReduxOwnersDetails id={ownerId}/>
+        <div className="owners-details container">
+            <Messages/>
+            <ReduxOwnersDetails id={ownerId}/>
+        </div>
         <Footer/>
     </div>;
 };

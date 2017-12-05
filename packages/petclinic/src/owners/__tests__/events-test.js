@@ -1,4 +1,4 @@
-import {ownerSearchDispatcher, ownerReducer} from'../owner-events';
+import {eventDispatcher, ownerReducer} from'../events';
 import restapi from "../../restapi";
 
 describe('Owner Search Events', () => {  
@@ -13,14 +13,14 @@ describe('Owner Search Events', () => {
   });
 
   it('Should dispatch change event', () => {
-    ownerSearchDispatcher(mockDispatcher).searchTextChanged("some text")
+    eventDispatcher(mockDispatcher).searchTextChanged("some text")
     expect(mockDispatcher).toBeCalledWith(OWNER_SEARCH_CHANGED_EVENT);
   });  
 
   it('Should dispatch submit search event', () => {
     restapi.get =  jest.fn().mockReturnValueOnce(GET_EVENT);
 
-    ownerSearchDispatcher(mockDispatcher).submitSearch("some text")
+    eventDispatcher(mockDispatcher).submitSearch("some text")
     expect(restapi.get).toBeCalledWith("OWNER_SEARCH", "/api-owners/owners?q=some text");
     expect(mockDispatcher).toBeCalledWith(GET_EVENT);
   }); 

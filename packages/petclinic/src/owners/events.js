@@ -12,7 +12,7 @@ const ownerInitialState = {
 const ACTION_PREFIX = "OWNER_SEARCH";
 const OWNER_SEARCH_CHANGED = ACTION_PREFIX + "_CHANGED";
 
-export const ownerSearchDispatcher = dispatch => {
+export const eventDispatcher = dispatch => {
     return {
         searchTextChanged: text => dispatch({
             type: OWNER_SEARCH_CHANGED,
@@ -24,7 +24,7 @@ export const ownerSearchDispatcher = dispatch => {
     }; 
 };
    
-export const ownerSearchStateMapper = (state, ownProps) => {
+export const stateMapper = (state, ownProps) => {
   return Object.assign({}, ownProps, {
       search: state[OWNER_STATE_KEY]
   });
