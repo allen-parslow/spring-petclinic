@@ -5,6 +5,7 @@ import Messages from "../messages";
 
 import { stateMapper, eventDispatcher } from "./events";
 
+import LoadAsync from "../async-load";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import {ValidatedInput, ValidatedSelect, validateAll, validatorTypes} from "../validation";
@@ -46,37 +47,24 @@ const OwnerForm = (props) => {
     </div>;
 };
 
-const OwnerLoadingForm = (props) => {
-    //console.log("OwnerLoadingForm=" + JSON.stringify(props) + Object.keys(props));
-    if (props.owner.intial) {
-        props.fetchOwner(props.id);
-    }
-
-    if (props.owner.intial || props.owner.pending) {
-        return <img src="assets/images/loading.gif"/>;
-    } else if(props.owner.result) {
-        return <OwnerForm {...props}/>;
-    } else if(props.owner.error) {
-        return null;
-    } else {
-        return <div>???</div>;
-    }
-};
-
-const OwnersDetails = (props) => {
+export const OwnersDetails = (props) => {
     //console.log("OwnersDetails=" + JSON.stringify(props) + Object.keys(props));
+    let title = "Owner Information";
+    let save = () => props.saveOwner(props.owner.changed, validateAll(props.owner.changed, ownerValidators));
+    let load = () => props.fetchOwner(props.id);
+    let edit = () => props.editOwner(); 
+    let cancelEdit = () => props.cancelEditOwner();
     let renderOwnerTitle = null;
     let renderOwnerFooter = null;
-    let save = () => props.saveOwner(props.owner.changed, validateAll(props.owner.changed, ownerValidators));
 
     if (!props.owner.editing) {
-        renderOwnerTitle = <h1>Owner Information{props.owner.result ? <button className="btn btn-link" onClick={() => props.editOwner()}>
+        renderOwnerTitle = <h1>{title}{props.owner.result ? <button className="btn btn-link" onClick={edit}>
                 <span className="glyphicon glyphicon-edit"/> 
             </button>
         : null}</h1>;
     } else {
-        renderOwnerTitle = <h1>Owner Information
-            <button className="btn btn-link" onClick={() => props.cancelEditOwner()}>
+        renderOwnerTitle = <h1>{title}
+            <button className="btn btn-link" onClick={cancelEdit}>
                 <span className="glyphicon glyphicon-remove"/> 
             </button>
             <button className="btn btn-link" onClick={save}>
@@ -90,7 +78,9 @@ const OwnersDetails = (props) => {
     
     return <div>
         {renderOwnerTitle}
-        <OwnerLoadingForm {...props}/>
+        <LoadAsync {...props.owner} load={load}>
+            <OwnerForm {...props}/>
+        </LoadAsync>
         {renderOwnerFooter}
     </div>;
 };

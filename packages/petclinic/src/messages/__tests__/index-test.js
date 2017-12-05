@@ -6,9 +6,13 @@ import React from "react";
 import { shallow } from 'enzyme';
 
 describe('Messages Component', () => {  
-  const props = {
-    msg: { error: true, text: "Doh!" }
-  };
+  let props = null;
+
+  beforeEach(() => {
+    props = {
+      msg: { error: true, text: "Doh!" }
+    };
+  });
 
   it('Should render component when there is an error', () => {
     const wrapper = shallow(<MessagesComponent {...props}/>);

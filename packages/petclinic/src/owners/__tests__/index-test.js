@@ -6,11 +6,15 @@ import React from "react";
 import { shallow } from 'enzyme';
 
 describe('Owner Search Component', () => {  
-  const props = {
-    searchTextChanged: jest.fn(),
-    submitSearch: jest.fn(),
-    search: { searchText: "Jones" }
-  };
+  let props = null;
+
+  beforeEach(() => {
+    props = {
+      searchTextChanged: jest.fn(),
+      submitSearch: jest.fn(),
+      search: { searchText: "Jones" }
+    };
+  });
 
   it('Should render component', () => {
     const wrapper = shallow(<OwnerSearchComponent {...props}/>);
