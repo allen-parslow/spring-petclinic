@@ -3,7 +3,6 @@ import restapi from "../restapi";
 const STATE_KEY = "owner";
 
 const ownerInitialState = {
-    initial: true,
     // results: null,
     // searching: null,
     // error: null
@@ -67,11 +66,11 @@ export const ownerReducer = (state = ownerInitialState, action) => {
     case ACTION_PREFIX + "_SAVING_SUCCESS":
       return Object.assign({}, state, { editing: false, validation: null, changed: null, result: state.changed });  
     case ACTION_PREFIX + "_PENDING":
-      return Object.assign({}, state, { pending: true, initial: false }); 
+      return { pending: true };
     case ACTION_PREFIX + "_SUCCESS":
       return { result: action.payload };   
     case "ERROR__API":
-    return Object.assign({}, state, { pending: false, initial: false, error: true }); 
+      return Object.assign({}, state, { pending: false, initial: false, error: true });
     default:
       return state;
   }

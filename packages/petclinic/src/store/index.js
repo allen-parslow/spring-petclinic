@@ -6,8 +6,15 @@ import ownersReducers  from "../owners/events";
 import ownerReducers  from "../owners-details/events";
 import vetReducers  from "../vets/events";
 
+const logReducer = (state = {}, action) => {
+    console.log("Action=" + JSON.stringify(action));
+    return state;
+};
+
+
 let store = createStore(
     combineReducers(Object.assign(
+        {"reducers": logReducer},
         messageReducers,         
         ownersReducers,
         ownerReducers,

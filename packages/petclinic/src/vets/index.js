@@ -4,8 +4,10 @@ import i18n from "i18n-lite";
 
 import { stateMapper, eventDispatcher } from "./events";
 
+import Messages from "../messages";
 import Navbar from "../navbar";
 import Footer from "../footer";
+import LoadAsync from "../async-load";
 
 import "./vets.scss";
 
@@ -36,13 +38,24 @@ export const VetTable = (props) => {
     </table>;
 };
 
-const ReduxVetTable = connect(stateMapper, eventDispatcher)(VetTable);
+export const Vets = (props) => {
+    console.log(Object.keys(props));
+    let load = () => props.fetch();
+
+    return <LoadAsync {...props.vets} load={load}>
+        <VetTable {...props}/>
+    </LoadAsync>;
+};
+
+
+const ReduxVetTable = connect(stateMapper, eventDispatcher)(Vets);
 
 export default (props) => {
     return <div>
         <Navbar selected="vets" />
         <div className="vets container xd-container">
             <h1>{i18n.t("TEXT__VETERINARIANS_GREETING")}</h1>
+            <Messages/>
             <ReduxVetTable/>
         </div>
         <Footer/>
