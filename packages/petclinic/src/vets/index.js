@@ -14,9 +14,11 @@ const renderSpecialty = (specialty, i) => {
 };
 
 const renderRow = (row, i) => {
+    var specialties = row.specialties || [];
+
     return <tr key={"vet_" + i}>
         <td>{row.firstName} {row.lastName}</td>
-        <td>{ row.specialties.map( (specialty, j) =>  renderSpecialty(specialty, j) ) }</td>
+        <td>{ specialties.map( (specialty, j) =>  renderSpecialty(specialty, j) ) }</td>
     </tr>;
 };
 
@@ -29,7 +31,7 @@ export const VetTable = (props) => {
             </tr>
         </thead>
         <tbody>
-            {props.vets.map( (row, i) => renderRow(row, i) )}
+            {props.vets.result.map( (row, i) => renderRow(row, i) )}
         </tbody>
     </table>;
 };
@@ -41,7 +43,7 @@ export default (props) => {
         <Navbar selected="vets" />
         <div className="vets container xd-container">
             <h1>{i18n.t("TEXT__VETERINARIANS_GREETING")}</h1>
-            <ReduxVetTable vets={[]}/>
+            <ReduxVetTable/>
         </div>
         <Footer/>
     </div>;

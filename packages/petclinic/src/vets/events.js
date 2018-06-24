@@ -3,12 +3,13 @@ import restapi from "../restapi";
 const STATE_KEY = "vets";
 
 const initialState = {
+    intial: true,
     result: [{
       firstName: "Bob",
       lastName: "Jones",
       specialties: []
     }]
-  };
+};
 
 export const eventDispatcher = dispatch => {
     return {}; 
@@ -16,7 +17,7 @@ export const eventDispatcher = dispatch => {
 
 export const stateMapper = (state, ownProps) => {
   return Object.assign({}, {error: state.error}, ownProps, {
-      owner: state[STATE_KEY]
+      vets: state[STATE_KEY]
   });
 };
 
