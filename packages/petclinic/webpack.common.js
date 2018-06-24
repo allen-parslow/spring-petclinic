@@ -5,10 +5,12 @@ const sassLintPlugin = require('sasslint-webpack-plugin');
 
 var path = require('path');
 
-console.log("Building " + process.env.npm_package_name + " v" + process.env.npm_package_version);
+var buildDir = path.resolve(__dirname, './build/')
+
+console.log("Building " + process.env.npm_package_name + " v" + process.env.npm_package_version + " at " + buildDir);
 
 module.exports = {
-  entry: "./src/entry.js",
+  entry: path.resolve(__dirname,"./src/entry.js"),
   output: {
     path: path.resolve(__dirname, './build/dist'),
     filename: "app.js"
