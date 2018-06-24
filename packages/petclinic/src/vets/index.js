@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import i18n from "i18n-lite";
+
+import { stateMapper, eventDispatcher } from "./events";
 
 import Navbar from "../navbar";
 import Footer from "../footer";
@@ -17,73 +20,29 @@ const renderRow = (row, i) => {
     </tr>;
 };
 
-export default class Vets extends React.Component {
-    constructor() {
-        super();
+export const VetTable = (props) => {
+    return <table>
+        <thead>
+            <tr>
+                <th>{i18n.t("TEXT__NAME_COLUMN")}</th>
+                <th>{i18n.t("TEXT__SPECIALTIES_COLUMN")}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {props.vets.map( (row, i) => renderRow(row, i) )}
+        </tbody>
+    </table>;
+};
 
-        this.state = {
-          vets: [
-            {
-              "id" : "34b85402-0ec8-4edb-9a37-b5e046e7b41c",
-              "firstName" : "James",
-              "lastName" : "Carter",
-              "specialties" : [ "none" ]
-            }, {
-              "id" : "d53fa462-15ea-47c9-8458-7fe10672dd9d",
-              "firstName" : "Helen",
-              "lastName" : "Leary",
-              "specialties" : [ "radiology" ]
-            }, {
-              "id" : "e0140ec1-e3bd-4e20-b3a9-99b93dc8ff6e",
-              "firstName" : "Linda",
-              "lastName" : "Douglas",
-              "specialties" : [ "dentistry", "surgery" ]
-            }, {
-              "id" : "dbeb61b1-6fc1-497a-af6f-b336381a3fe5",
-              "firstName" : "Rafael",
-              "lastName" : "Ortega",
-              "specialties" : [ "surgery" ]
-            }, {
-              "id" : "16719f77-9cb4-48dd-ac49-7fc8c9196385",
-              "firstName" : "Henry",
-              "lastName" : "Stevens",
-              "specialties" : [ "radiology" ]
-            }, {
-              "id" : "df841cc4-ab38-4c71-9227-335186d0a1b4",
-              "firstName" : "Sharon",
-              "lastName" : "Jenkins",
-              "specialties" : [ "none" ]
-            }, {
-              "id" : "df841cc4-ab38-4c71-9227-335186d0a1bX",
-              "firstName" : "Hudson",
-              "lastName" : "Jenkins",
-              "specialties" : [ "radiology" ]
-            }
-          ]
-        };
-      }
+const ReduxVetTable = connect(stateMapper, eventDispatcher)(VetTable);
 
-    render() {
-        return (
-            <div>
-                <Navbar selected="vets" />
-                <div className="vets container xd-container">
-                    <h1>{i18n.t("TEXT__VETERINARIANS_GREETING")}</h1>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{i18n.t("TEXT__NAME_COLUMN")}</th>
-                                <th>{i18n.t("TEXT__SPECIALTIES_COLUMN")}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.state.vets.map( (row, i) => renderRow(row, i) )}
-                        </tbody>
-                    </table>
-                </div>
-                <Footer/>
-            </div>
-        );
-    }
-}
+export default (props) => {
+    return <div>
+        <Navbar selected="vets" />
+        <div className="vets container xd-container">
+            <h1>{i18n.t("TEXT__VETERINARIANS_GREETING")}</h1>
+            <ReduxVetTable vets={[]}/>
+        </div>
+        <Footer/>
+    </div>;
+};
