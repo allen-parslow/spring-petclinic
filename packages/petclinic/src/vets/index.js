@@ -39,7 +39,6 @@ export const VetTable = (props) => {
 };
 
 export const Vets = (props) => {
-    console.log(Object.keys(props));
     let load = () => props.fetch();
 
     return <LoadAsync {...props.vets} load={load}>
